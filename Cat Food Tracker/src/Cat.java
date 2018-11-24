@@ -1,7 +1,10 @@
-
+import java.util.ArrayList;
 public class Cat {
 	String catName;
 	double weight;
+	double calorieGoal=weight*30;
+	ArrayList<FoodDiary> FoodDiaryList=new ArrayList<FoodDiary>();
+	ArrayList<WeightDiary> WeightDiaryList=new ArrayList<WeightDiary>();
 	
 	public String getCatName() {
 		return catName;
@@ -21,6 +24,16 @@ public class Cat {
 	public void setCalorieGoal(double calorieGoal) {
 		this.calorieGoal = calorieGoal;
 	}
-	double calorieGoal=weight*30;
 	
+	
+	public double remainingCalories() {
+		for (int i=0;i<FoodDiaryList.size();i++) {
+			
+			//if (DateUtils.isToday(FoodDiary.getFoodTimeEntry())){
+				
+			//}
+	
+		}
+		return calorieGoal;
+	}
 }
