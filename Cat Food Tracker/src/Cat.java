@@ -1,4 +1,8 @@
 import java.util.ArrayList;
+import java.util.Date;
+
+import org.apache.commons.lang3.time.DateUtils;
+
 public class Cat {
 	String catName;
 	double weight;
@@ -29,9 +33,9 @@ public class Cat {
 	public double remainingCalories() {
 		for (int i=0;i<FoodDiaryList.size();i++) {
 			
-			//if (DateUtils.isToday(FoodDiary.getFoodTimeEntry())){
+			if (DateUtils.isSameDay(new Date(),FoodDiaryList.get(i).getFoodTimeEntry())){
 				
-			//}
+			}
 	
 		}
 		return calorieGoal;
