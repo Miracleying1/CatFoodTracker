@@ -2,11 +2,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateUtils;
-
 public class Cat {
 	String catName;
 	double weight;
 	double calorieGoal=weight*30;
+	double calorieOfToday=0;
+	double remainingCalorie=calorieGoal;
 	ArrayList<FoodDiary> FoodDiaryList=new ArrayList<FoodDiary>();
 	ArrayList<WeightDiary> WeightDiaryList=new ArrayList<WeightDiary>();
 	
@@ -29,15 +30,14 @@ public class Cat {
 		this.calorieGoal = calorieGoal;
 	}
 	
-	
 	public double remainingCalories() {
 		for (int i=0;i<FoodDiaryList.size();i++) {
 			
-			if (DateUtils.isSameDay(new Date(),FoodDiaryList.get(i).getFoodTimeEntry())){
-				
+			if (DateUtils.isSameDay(new Date(), FoodDiaryList.get(i).getFoodTimeEntry())){
+				calorieOfToday+=FoodDiaryList.get(i).getCalories();
+				remainingCalorie-=FoodDiaryList.get(i).getCalories();
 			}
-	
 		}
-		return calorieGoal;
+		return remainingCalorie;
 	}
 }
