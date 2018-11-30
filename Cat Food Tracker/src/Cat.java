@@ -5,11 +5,17 @@ import org.apache.commons.lang3.time.DateUtils;
 public class Cat {
 	String catName;
 	double weight;
-	double calorieGoal=weight*30;
+	double calorieGoal;
 	double calorieOfToday=0;
 	double remainingCalorie=calorieGoal;
-	ArrayList<FoodDiary> FoodDiaryList=new ArrayList<FoodDiary>();
-	ArrayList<WeightDiary> WeightDiaryList=new ArrayList<WeightDiary>();
+	FoodDiary foodDiary = new FoodDiary();
+	ArrayList<WeightEntry> WeightDiaryList=new ArrayList<WeightEntry>();
+	
+	public Cat(String name, double weight) {
+		this.catName = name;
+		this.weight = weight;
+		calorieGoal= weight*30;
+	}
 	
 	public String getCatName() {
 		return catName;
@@ -30,14 +36,16 @@ public class Cat {
 		this.calorieGoal = calorieGoal;
 	}
 	
-	public double remainingCalories() {
-		for (int i=0;i<FoodDiaryList.size();i++) {
-			
-			if (DateUtils.isSameDay(new Date(), FoodDiaryList.get(i).getFoodTimeEntry())){
-				calorieOfToday+=FoodDiaryList.get(i).getCalories();
-				remainingCalorie-=FoodDiaryList.get(i).getCalories();
-			}
-		}
-		return remainingCalorie;
+	public double getRemainingCaloriesToday() {	
+		int totalCalorieToday =  foodDiary.getTotalCaloriesToday();
+		return calorieGoal - totalCalorieToday;
+	}
+	
+	public double getTotalCaloriesToday() {
+		return foodDiary.getTotalCaloriesToday();		
+	}
+	
+	public void addFoodEntry(FoodEntry entry) {
+		foodDiary.addEntry(entry);
 	}
 }

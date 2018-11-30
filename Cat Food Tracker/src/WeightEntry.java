@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class WeightDiary {
+public class WeightEntry {
 	double weightEntry;
 	Date weightTimeEntry;
 	public double getWeightEntry() {
