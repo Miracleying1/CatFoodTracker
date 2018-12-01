@@ -14,6 +14,7 @@ public class FoodEntry {
 	public CatFood getFood() {
 		return food;
 	}
+	
 	public void setFood(CatFood food) {
 		this.food = food;
 	}

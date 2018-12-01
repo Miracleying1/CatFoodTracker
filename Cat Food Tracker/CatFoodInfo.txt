@@ -1,0 +1,7 @@
+D001,Merrick,Turkey,Dry,26.56
+D002,Wellness,Turkey&Duck,Dry,34.18
+D003,Authority,Beef,Dry,36.55
+W001,BlueBuffalo,TemptingTunaGrill,Wet,26.5
+W002,Friskies,ClassicSeafood,Wet,31.27
+W003,FancyFeast,WildSalmon,Wet,24.67
+

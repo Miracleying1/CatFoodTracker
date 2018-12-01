@@ -1,14 +1,16 @@
 public class CatFood {
 	String catFoodID;
 	String brand;
+	String foodName;
 	String flavor;
 	String type;
 	double calories;//per oz
 	
 	
-	public CatFood(String catFoodID,String brand, String type, double calories) {
+	public CatFood(String catFoodID,String brand, String foodName, String type, double calories) {
 		this.catFoodID=catFoodID;
 		this.brand=brand;
+		this.foodName = foodName;
 		this.type=type;
 		this.calories=calories;
 	}

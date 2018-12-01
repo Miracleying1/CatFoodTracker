@@ -1,21 +1,35 @@
 import java.io.File;
+
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
-public class CatFoodList {
+import java.util.StringTokenizer;
+
+/**
+ * This class simulates a database containing pet food data by reading 
+ * from a comma separated text file
+ *
+ */
+public class CatFoodDatabase {
 	String filename;
-	CatFood[] CatFoodList;
+	ArrayList<CatFood> foodList;
 	
-	public CatFoodList(String filename) {
+	public CatFoodDatabase(String filename) {
 		this.filename=filename;
-		int numLines=0;
 		File file=new File(filename);
 		try
 		{
-			Scanner inputStream=new Scanner(file);
-			inputStream.next();
+			//TODO Currently this cannot handle names with spaces
+			Scanner inputStream = new Scanner(file);
+			foodList = new ArrayList<>();
 			while (inputStream.hasNext()) {
-				String data=inputStream.next();
-				numLines++;
+				String data = inputStream.next();
+				StringTokenizer tokens = new StringTokenizer(data, ",");
+				if(tokens.countTokens() != 5) {
+					throw new RuntimeException("invalid cat food db file");
+				}
+				foodList.add(new CatFood(tokens.nextToken(), tokens.nextToken(), 
+						tokens.nextToken(), tokens.nextToken(), Double.parseDouble(tokens.nextToken())));
 			}
 		inputStream.close();
 		}
@@ -23,18 +37,5 @@ public class CatFoodList {
 			e.printStackTrace();
 		}
 		
-	}
-	public CatFood fetchCatFood(int idx) {
-		return CatFoodList[idx];
-	}
-	public int FindCatFoodIndex(String Input) {//to search for the user input in the list
-		int index=-1;
-		for(int i=0; i<CatFoodList.length;i++) {
-			if(CatFoodList[i].getCatFoodID().equals(Input)) {
-				index=i;
-				break;
-			}
-		}
-		return index;
 	}
 }
