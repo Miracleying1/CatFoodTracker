@@ -3,6 +3,8 @@ import java.util.Date;
 import java.util.List;
 
 import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Controller {
 
@@ -23,6 +25,11 @@ public class Controller {
 	
 	public void addEntry(CatFood food, double quantity) {
 		cat.addFoodEntry(new FoodEntry(food, new Date(), quantity ));
+	}
+	
+	public List<FoodEntry> getTodaysEntries() {
+		ObservableList<FoodEntry> list = FXCollections.observableArrayList();
+		return cat.getFoodDiary().getTodaysEntries();
 	}
 	
 	public double getRemainingCalories() {

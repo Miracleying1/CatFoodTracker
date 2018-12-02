@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -153,6 +154,10 @@ public class CatTrackerApp extends Application {
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().add(btn);
 		grid.add(hbBtn, 1, 4);
+		
+		TableView<FoodEntry> table = new TableView<FoodEntry>();
+		 ObservableList<FoodEntry> entries = control.getTodaysEntries();
+		 table.setItems(entries);
 		
 		return foodTab;
 	}

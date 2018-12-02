@@ -3,11 +3,12 @@ import java.util.Date;
 
 import org.apache.commons.lang3.time.DateUtils;
 public class Cat {
+
+
 	String catName;
 	double weight;
 	double calorieGoal;
-	double calorieOfToday=0;
-	double remainingCalorie=calorieGoal;
+	
 	FoodDiary foodDiary = new FoodDiary();
 	ArrayList<WeightEntry> WeightDiaryList=new ArrayList<WeightEntry>();
 	
@@ -15,6 +16,22 @@ public class Cat {
 		this.catName = name;
 		this.weight = weight;
 		calorieGoal= weight*30;
+	}
+	
+	public FoodDiary getFoodDiary() {
+		return foodDiary;
+	}
+
+	public void setFoodDiary(FoodDiary foodDiary) {
+		this.foodDiary = foodDiary;
+	}
+
+	public ArrayList<WeightEntry> getWeightDiaryList() {
+		return WeightDiaryList;
+	}
+
+	public void setWeightDiaryList(ArrayList<WeightEntry> weightDiaryList) {
+		WeightDiaryList = weightDiaryList;
 	}
 	
 	public String getCatName() {

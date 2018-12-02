@@ -31,4 +31,12 @@ public class FoodDiary {
 		return total;
 	}
 	
+	public List<FoodEntry> getTodaysEntries() {
+		Date now = DateUtils.truncate(new Date(), java.util.Calendar.DAY_OF_MONTH);
+		if(entries.containsKey(now)) {
+			return entries.get(now);
+		}
+		return null;
+	}
+	
 }
