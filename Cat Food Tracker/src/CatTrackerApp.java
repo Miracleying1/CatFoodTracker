@@ -14,10 +14,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -31,15 +35,29 @@ public class CatTrackerApp extends Application {
 	}
 
 	private void showStartScreen(Stage primaryStage, Controller control) {
+		Text scenetitle = new Text("Cat Tracker");
+		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+
+		TabPane tabPane = new TabPane();
+		Scene scene = new Scene(tabPane, 600, 575);
+		Tab initTab = getCatInitTab(control);
+		Tab foodTab = getFoodTab(control);
+		//TODO foodTab.setDisable(true);
+		
+		tabPane.getTabs().add(initTab);
+		tabPane.getTabs().add(foodTab);
+
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	public Tab getCatInitTab(Controller control) {
+
 		GridPane grid = new GridPane();
-		grid.setAlignment(Pos.CENTER);
+		grid.setAlignment(Pos.TOP_LEFT);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
-		Scene scene = new Scene(grid, 600, 575);
-		Text scenetitle = new Text("Cat Tracker");
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(scenetitle, 0, 0, 2, 1);
 
 		Label catName = new Label("Cat name:");
 		grid.add(catName, 0, 1);
@@ -84,19 +102,25 @@ public class CatTrackerApp extends Application {
 				currentCat.setText("Current cat: " + control.getCat().getCatName());
 				currentCatWeight.setText("Current weight: " + control.getCat().getWeight());
 				caloriesToday.setText("Todays Calories: " + control.getCat().getTotalCaloriesToday());
-				showFoodScreen(primaryStage, control);
-				
 			}
 		});
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().add(btn);
 		grid.add(hbBtn, 1, 4);
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		Tab initTab = new Tab();
+		initTab.setText("Your Cat");
+		initTab.setContent(grid);
+		initTab.setClosable(false);
+		return initTab;
+
 	}
-	
-	public void showFoodScreen(Stage primaryStage, Controller control) {
+
+	public Tab getFoodTab(Controller control) {
+		Tab foodTab = new Tab();
+		foodTab.setClosable(false);
+		foodTab.setText("Food Log");
 		GridPane grid = new GridPane();
+		foodTab.setContent(grid);
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
 		grid.setVgap(10);
@@ -105,13 +129,32 @@ public class CatTrackerApp extends Application {
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 0, 0, 2, 1);
 		ArrayList<CatFood> foods = control.getFoods();
-		ObservableList<String> options = FXCollections.observableArrayList();
-		final ComboBox<String> comboBox = new ComboBox<String>(options);
-		for(int i =0; i < foods.size(); i++) {
-			options.add(foods.get(i).getBrand());
+		ObservableList<CatFood> options = FXCollections.observableArrayList();
+		final ComboBox<CatFood> comboBox = new ComboBox<CatFood>(options);
+		for (int i = 0; i < foods.size(); i++) {
+			options.add(foods.get(i));
 		}
 		grid.add(comboBox, 0, 1);
-		primaryStage.getScene().setRoot(grid);
+
+		Button btn = new Button("Add food");
+		HBox hbBtn = new HBox(10);
+
+		Text caloriesToday = new Text("Todays calories: " + control.getTotalCalories());
+		grid.add(caloriesToday, 0, 7);
+
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				control.addEntry(comboBox.getValue(), 1);
+				caloriesToday.setText("Todays calories: " + control.getTotalCalories());
+			}
+		});
+		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+		hbBtn.getChildren().add(btn);
+		grid.add(hbBtn, 1, 4);
+		
+		return foodTab;
 	}
 
 	@Override
@@ -122,27 +165,3 @@ public class CatTrackerApp extends Application {
 
 	}
 }
-//public class CatTrackerApp {
-//
-//	
-//	 public static void main(String[] args) {
-//		Controller control = new Controller();
-//		CatFoodUI ui = new CatFoodUI();
-//		
-//		//Following code is simulation of events UI might trigger
-//		control.initializeCat("Buddy", 15.0 );
-//		//Todo get list of foods from fake DB 
-//		//String catFoodID,String brand, String type, double calories
-//		control.addEntry(new CatFood("1", "Purina", "dry", 30), 1);
-//		
-//		System.out.println("Goal cals: " + control.getCalorieGoal());
-//		System.out.println("Consumed cals: " + control.getTotalCalories());
-//		System.out.println("Remaining cals: " + control.getRemainingCalories());
-//		
-//		control.addEntry(new CatFood("1", "Purina", "wet", 50), 2);
-//		System.out.println("Goal cals: " + control.getCalorieGoal());
-//		System.out.println("Consumed cals: " + control.getTotalCalories());
-//		System.out.println("Remaining cals: " + control.getRemainingCalories());
-//		 
-//	 }
-//}

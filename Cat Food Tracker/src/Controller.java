@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javafx.beans.Observable;
+
 public class Controller {
 
 	//For now, app supports one cat
@@ -24,15 +26,27 @@ public class Controller {
 	}
 	
 	public double getRemainingCalories() {
-		return cat.getRemainingCaloriesToday();
+		if(cat != null) {
+			return cat.getRemainingCaloriesToday();
+		} else {
+			return 0;
+		}
 	}
 	
 	public double getTotalCalories() {
+		if(cat != null) {
 		return cat.getTotalCaloriesToday();
+		} else {
+			return 0;
+		}
 	}
 	
 	public double getCalorieGoal() {
+		if(cat != null) {
 		return cat.getCalorieGoal();
+		} else {
+			return 0;
+		}
 	}
 	
 	public ArrayList<CatFood> getFoods(){
