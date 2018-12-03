@@ -1,19 +1,28 @@
 import java.util.Date;
 
 public class WeightEntry {
-	double weightEntry;
-	Date weightTimeEntry;
-	public double getWeightEntry() {
-		return weightEntry;
+	double weight;
+	Date date;
+
+	WeightEntry(double weight, Date date) {
+		this.weight = weight;
+		this.date = date;
 	}
-	public void setWeightEntry(double weightEntry) {
-		this.weightEntry = weightEntry;
+
+	public double getWeight() {
+		return weight;
 	}
-	public Date getTimeEntry() {
-		return weightTimeEntry;
+
+	public void setWeight(double weight) {
+		this.weight = weight;
 	}
-	public void setWeightTimeEntry(Date weightTimeEntry) {
-		this.weightTimeEntry = weightTimeEntry;
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }

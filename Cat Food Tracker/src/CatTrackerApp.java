@@ -23,13 +23,16 @@ public class CatTrackerApp extends Application {
 
 		TabPane tabPane = new TabPane();
 		Scene scene = new Scene(tabPane);
-		Tab initTab = new InitCatTab(control, primaryStage).getCatInitTab();
-		Tab foodTab = new FoodTab(control, primaryStage).getFoodTab();
-		
-		foodTab.disableProperty().bind(control.getUnInitialized());		
+		Tab initTab = new InitCatTab(control, primaryStage).getTab();
+		Tab foodTab = new FoodTab(control, primaryStage).getTab();
+		Tab weightTab = new WeightTab(control, primaryStage).getTab();
+
+		foodTab.disableProperty().bind(control.getUnInitialized());
+		weightTab.disableProperty().bind(control.getUnInitialized());
 
 		tabPane.getTabs().add(initTab);
 		tabPane.getTabs().add(foodTab);
+		tabPane.getTabs().add(weightTab);
 
 		primaryStage.setScene(scene);
 		primaryStage.setHeight(600);
@@ -37,7 +40,7 @@ public class CatTrackerApp extends Application {
 		primaryStage.show();
 
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
