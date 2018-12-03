@@ -1,13 +1,16 @@
 import java.util.ArrayList;
-import java.util.Date;
 
-import org.apache.commons.lang3.time.DateUtils;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 public class Cat {
 
 
 	String catName;
+	StringProperty fxCatName = new SimpleStringProperty();
+	SimpleDoubleProperty fxCalorieGoal = new SimpleDoubleProperty(0);	
+
 	double weight;
-	double calorieGoal;
 	
 	FoodDiary foodDiary = new FoodDiary();
 	ArrayList<WeightEntry> WeightDiaryList=new ArrayList<WeightEntry>();
@@ -16,8 +19,21 @@ public class Cat {
 		return foodDiary;
 	}
 
+	public StringProperty getFxCatName() {
+		return fxCatName;
+	}
+
 	public void setFoodDiary(FoodDiary foodDiary) {
 		this.foodDiary = foodDiary;
+	}
+
+	public void setFxCatName(String fxCatName) {
+		System.out.println("updaing fx cat name");
+		this.fxCatName.set(fxCatName);
+	}
+	
+	public SimpleDoubleProperty getFxCalorieGoal() {
+		return fxCalorieGoal;
 	}
 
 	public ArrayList<WeightEntry> getWeightDiaryList() {
@@ -32,6 +48,7 @@ public class Cat {
 		return catName;
 	}
 	public void setCatName(String catName) {
+		this.setFxCatName(catName);
 		this.catName = catName;
 	}
 	public double getWeight() {
@@ -39,13 +56,13 @@ public class Cat {
 	}
 	public void setWeight(double weight) {
 		this.weight = weight;
-		calorieGoal= weight*30;
+		this.setCalorieGoal(weight * 30);		
 	}
 	public double getCalorieGoal() {
-		return calorieGoal;
+		return fxCalorieGoal.get();
 	}
-	public void setCalorieGoal(double calorieGoal) {
-		this.calorieGoal = calorieGoal;
+	public void setCalorieGoal(double calorieGoal) {		
+		this.fxCalorieGoal.setValue(calorieGoal);		
 	}
 	
 	public double getRemainingCaloriesToday() {	
