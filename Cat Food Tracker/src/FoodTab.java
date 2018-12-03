@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -86,6 +87,9 @@ public class FoodTab {
 		
 		Text remainingCalories = new Text("Remaining calories: " + control.getRemainingCalories());
 		grid.add(remainingCalories, 0, 9);
+		
+		Text calorieMessage = new Text("Cat can keep eating!");
+		grid.add(calorieMessage, 0, 10);
 
 		hbBtn.setAlignment(Pos.TOP_LEFT);
 		hbBtn.getChildren().add(btn);
@@ -106,8 +110,8 @@ public class FoodTab {
 		};
 		
 		btn.disableProperty().bind(bb);		
-		//todo listen for total cals
-		//todo listen for remaining cals
+		//todo listen to observable for total cals
+		//todo listen to observable for remaining cals
 		
 		  control.getFxCalorieGoal().addListener(new ChangeListener<Object>(){
 			  	@Override public void changed(ObservableValue<?> o,Object oldVal, 
@@ -126,7 +130,11 @@ public class FoodTab {
 				// up correctly,
 				// but setting it manually each time as a hack/shortcut
 				caloriesToday.setText("Todays calories: " + control.getTotalCalories());
-				remainingCalories.setText("Remaining calories: " + control.getRemainingCalories());				
+				remainingCalories.setText("Remaining calories: " + control.getRemainingCalories());
+				if(control.getRemainingCalories() <= 0) {
+					calorieMessage.setText("Cat is over the calorie limit!");
+					calorieMessage.setFill(Color.RED);
+				}
 				ObservableList<FoodEntry> data = FXCollections.observableArrayList(control.getTodaysEntries());
 				table.setItems(data);
 			}
@@ -134,7 +142,7 @@ public class FoodTab {
 
 		return foodTab;
 	}
-
+	
 	private TableView<FoodEntry> getFoodTable() {
 		TableView<FoodEntry> table = new TableView<FoodEntry>();
 		TableColumn foodName = new TableColumn("Food");

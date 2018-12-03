@@ -67,7 +67,7 @@ public class Cat {
 	
 	public double getRemainingCaloriesToday() {	
 		int totalCalorieToday =  foodDiary.getTotalCaloriesToday();
-		return calorieGoal - totalCalorieToday;
+		return getCalorieGoal() - totalCalorieToday;
 	}
 	
 	public double getTotalCaloriesToday() {
