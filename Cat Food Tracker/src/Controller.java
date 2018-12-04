@@ -4,6 +4,7 @@ import java.util.List;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.ObservableList;
 
 public class Controller {
 
@@ -25,7 +26,8 @@ public class Controller {
 	public void initializeCat(String name, double weight) {
 		unInitialized.setValue(false);
 		cat.setCatName(name);
-		cat.setWeight(weight);
+		cat.setStartingWeight(weight);
+		cat.addWeightEntry(new WeightEntry(weight, new Date()));
 	}
 
 	public SimpleBooleanProperty getUnInitialized() {
@@ -65,7 +67,7 @@ public class Controller {
 		return fromDb.foodList;
 	}
 
-	public ArrayList<WeightEntry> getWeightEntries() {
+	public ObservableList<WeightEntry> getWeightEntries() {
 		return cat.getWeightDiaryList();
 	}
 

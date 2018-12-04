@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javafx.collections.FXCollections;
@@ -58,7 +59,7 @@ public class WeightTab extends JavaFxTab {
 		grid.add(textField, 0, 3);
 
 		TableView<WeightEntry> table = getWeightTable();
-		table.setItems(FXCollections.observableArrayList(control.getWeightEntries()));
+		
 
 		Button btn = new Button("Add entry");
 		HBox hbBtn = new HBox(10);
@@ -66,14 +67,14 @@ public class WeightTab extends JavaFxTab {
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().add(btn);
 		grid.add(hbBtn, 0, 4);
-
+		
+		table.setItems(control.getWeightEntries());
+		
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent event) {
-				control.addWeightEntry(new Date(), Double.parseDouble(textField.getText()));
-				ObservableList<WeightEntry> data = FXCollections.observableArrayList(control.getWeightEntries());
-				table.setItems(data);
+			public void handle(ActionEvent event) {				
+				control.addWeightEntry(new Date(), Double.parseDouble(textField.getText()));								//
 			}
 		});
 

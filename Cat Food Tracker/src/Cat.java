@@ -3,18 +3,19 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Cat {
 
-	String catName;
 	StringProperty fxCatName = new SimpleStringProperty();
 	SimpleDoubleProperty fxCalorieGoal = new SimpleDoubleProperty(0);
 	SimpleDoubleProperty fxRemainingCals = new SimpleDoubleProperty(0);
 
-	double weight;
+	double startingWeight;
 
 	FoodDiary foodDiary = new FoodDiary();
-	ArrayList<WeightEntry> weightDiaryList = new ArrayList<WeightEntry>();
+	ObservableList<WeightEntry> fxWeightDiaryList = FXCollections.observableArrayList();
 
 	public FoodDiary getFoodDiary() {
 		return foodDiary;
@@ -41,29 +42,24 @@ public class Cat {
 		return fxRemainingCals;
 	}
 
-	public ArrayList<WeightEntry> getWeightDiaryList() {
-		return weightDiaryList;
-	}
-
-	public void setWeightDiaryList(ArrayList<WeightEntry> weightDiaryList) {
-		weightDiaryList = weightDiaryList;
+	public ObservableList<WeightEntry> getWeightDiaryList() {
+		return fxWeightDiaryList;
 	}
 
 	public String getCatName() {
-		return catName;
+		return fxCatName.getValue();
 	}
 
 	public void setCatName(String catName) {
 		this.setFxCatName(catName);
-		this.catName = catName;
 	}
 
-	public double getWeight() {
-		return weight;
+	public double getStartingWeight() {
+		return startingWeight;
 	}
 
-	public void setWeight(double weight) {
-		this.weight = weight;
+	public void setStartingWeight(double weight) {
+		this.startingWeight = weight;
 		this.setCalorieGoal(weight * 30);
 		fxRemainingCals.setValue(getCalorieGoal() - foodDiary.getTotalCaloriesToday());
 	}
@@ -90,6 +86,6 @@ public class Cat {
 	}
 
 	public void addWeightEntry(WeightEntry entry) {
-		weightDiaryList.add(entry);
+		fxWeightDiaryList.add(entry);
 	}
 }
