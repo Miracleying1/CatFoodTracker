@@ -33,8 +33,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-//To enable JavaFx UI, follow instructions for allowing accesing (option using Eclipse Build Path worked well)
-//https://stackoverflow.com/questions/22812488/using-javafx-in-jre-8-access-restriction-error
 public class CatTrackerApp extends Application {
 
 	Stage primaryStage;
@@ -51,6 +49,7 @@ public class CatTrackerApp extends Application {
 		Scene scene = new Scene(tabPane);
 		Tab initTab = getCatInitTab(control);
 		Tab foodTab = getFoodTab(control);
+		// Todo would be nice to disable until cat is initialized
 		// foodTab.setDisable(true);
 
 		tabPane.getTabs().add(initTab);
@@ -83,15 +82,6 @@ public class CatTrackerApp extends Application {
 		TextField weightTextField = new TextField();
 		grid.add(weightTextField, 1, 2);
 
-		Text currentCat = new Text("Current cat: ");
-		grid.add(currentCat, 0, 5);
-
-		Text currentCatWeight = new Text("Current cat weight: ");
-		grid.add(currentCatWeight, 0, 6);
-
-		Text caloriesToday = new Text("Todays calories: ");
-		grid.add(caloriesToday, 0, 7);
-
 		BooleanBinding bb = new BooleanBinding() {
 			{
 				super.bind(catNameTextField.textProperty(), weightTextField.textProperty());
@@ -107,13 +97,9 @@ public class CatTrackerApp extends Application {
 		btn.disableProperty().bind(bb);
 
 		btn.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent event) {
 				control.initializeCat(catNameTextField.getText(), Double.parseDouble(weightTextField.getText()));
-				currentCat.setText("Current cat: " + control.getCat().getCatName());
-				currentCatWeight.setText("Current weight: " + control.getCat().getWeight());
-				caloriesToday.setText("Todays Calories: " + control.getCat().getTotalCaloriesToday());
 			}
 		});
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
@@ -136,7 +122,7 @@ public class CatTrackerApp extends Application {
 		Tab foodTab = new Tab();
 		ImageView icon = new ImageView(new Image("fish-food.png"));
 	    icon.setFitWidth(16); 
-	    icon.setFitHeight(16); // your preference		
+	    icon.setFitHeight(16);
 		foodTab.setGraphic(icon);
 		foodTab.setClosable(false);
 		foodTab.setText("Food Log");
@@ -166,9 +152,15 @@ public class CatTrackerApp extends Application {
 
 		Button btn = new Button("Add food");
 		HBox hbBtn = new HBox(10);
+		
+		Text goal = new Text("Calorie Goal: " + control.getCalorieGoal());
+		grid.add(goal, 0, 6);
 
 		Text caloriesToday = new Text("Todays calories: " + control.getTotalCalories());
 		grid.add(caloriesToday, 0, 7);
+		
+		Text remainingCalories = new Text("Remaining calories: " + control.getRemainingCalories());
+		grid.add(remainingCalories, 0, 8);
 
 		hbBtn.setAlignment(Pos.TOP_LEFT);
 		hbBtn.getChildren().add(btn);
@@ -194,10 +186,13 @@ public class CatTrackerApp extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				control.addEntry(comboBox.getValue(), Integer.parseInt(quantityTextField.getText()));
-				caloriesToday.setText("Todays calories: " + control.getTotalCalories());
+				
 				// Todo The table display should update automatically if observable list is set
 				// up correctly,
 				// but setting it manually each time as a hack/shortcut
+				goal.setText("Calorie Goal: " + control.getCalorieGoal());
+				caloriesToday.setText("Todays calories: " + control.getTotalCalories());
+				remainingCalories.setText("Remaining calories: " + control.getRemainingCalories());				
 				ObservableList<FoodEntry> data = FXCollections.observableArrayList(control.getTodaysEntries());
 				table.setItems(data);
 			}
