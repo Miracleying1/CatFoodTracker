@@ -12,12 +12,6 @@ public class Cat {
 	FoodDiary foodDiary = new FoodDiary();
 	ArrayList<WeightEntry> WeightDiaryList=new ArrayList<WeightEntry>();
 	
-	public Cat(String name, double weight) {
-		this.catName = name;
-		this.weight = weight;
-		calorieGoal= weight*30;
-	}
-	
 	public FoodDiary getFoodDiary() {
 		return foodDiary;
 	}
@@ -45,6 +39,7 @@ public class Cat {
 	}
 	public void setWeight(double weight) {
 		this.weight = weight;
+		calorieGoal= weight*30;
 	}
 	public double getCalorieGoal() {
 		return calorieGoal;

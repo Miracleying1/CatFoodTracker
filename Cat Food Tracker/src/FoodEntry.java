@@ -1,11 +1,13 @@
 import java.util.Date;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class FoodEntry {
 	CatFood food;
 	Date foodTimeEntry;
-	double quantity;
+	int quantity;
 	
-	public FoodEntry(CatFood food, Date time, double quantity) {
+	public FoodEntry(CatFood food, Date time, int quantity) {
 		this.food = food;
 		this.foodTimeEntry = time;
 		this.quantity = quantity;
@@ -24,13 +26,13 @@ public class FoodEntry {
 	public void setFoodTimeEntry(Date foodTimeEntry) {
 		this.foodTimeEntry = foodTimeEntry;
 	}
-	public double getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(double quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 	public double getCalories() {
-		return food.getCalories()*quantity;	
+		return food.getCalories( )* quantity;	
 	}
 }

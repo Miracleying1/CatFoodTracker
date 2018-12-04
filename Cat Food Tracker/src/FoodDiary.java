@@ -9,6 +9,11 @@ import org.apache.commons.lang3.time.DateUtils;
 public class FoodDiary {
 	Map<Date, List<FoodEntry>> entries = new HashMap<Date, List<FoodEntry>>();
 	
+	public FoodDiary() {
+		Date now = DateUtils.truncate(new Date(), java.util.Calendar.DAY_OF_MONTH);
+		entries.put(now, new ArrayList<FoodEntry>());
+	}
+	
 	public void addEntry(FoodEntry entry) {
 		Date now = DateUtils.truncate(new Date(), java.util.Calendar.DAY_OF_MONTH);
 		if(entries.containsKey(now)) {

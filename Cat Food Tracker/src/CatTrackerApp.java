@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.beans.binding.BooleanBinding;
@@ -16,8 +17,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -31,6 +36,9 @@ import javafx.stage.Stage;
 //To enable JavaFx UI, follow instructions for allowing accesing (option using Eclipse Build Path worked well)
 //https://stackoverflow.com/questions/22812488/using-javafx-in-jre-8-access-restriction-error
 public class CatTrackerApp extends Application {
+
+	Stage primaryStage;
+
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -40,16 +48,19 @@ public class CatTrackerApp extends Application {
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 
 		TabPane tabPane = new TabPane();
-		Scene scene = new Scene(tabPane, 600, 575);
+		Scene scene = new Scene(tabPane);
 		Tab initTab = getCatInitTab(control);
 		Tab foodTab = getFoodTab(control);
-		//TODO foodTab.setDisable(true);
-		
+		// foodTab.setDisable(true);
+
 		tabPane.getTabs().add(initTab);
 		tabPane.getTabs().add(foodTab);
 
 		primaryStage.setScene(scene);
+		primaryStage.setHeight(600);
+		primaryStage.setWidth(800);
 		primaryStage.show();
+
 	}
 
 	public Tab getCatInitTab(Controller control) {
@@ -109,6 +120,10 @@ public class CatTrackerApp extends Application {
 		hbBtn.getChildren().add(btn);
 		grid.add(hbBtn, 1, 4);
 		Tab initTab = new Tab();
+		ImageView icon = new ImageView(new Image("cat.png"));
+	    icon.setFitWidth(16); 
+	    icon.setFitHeight(16);
+	    initTab.setGraphic(icon);
 		initTab.setText("Your Cat");
 		initTab.setContent(grid);
 		initTab.setClosable(false);
@@ -116,8 +131,13 @@ public class CatTrackerApp extends Application {
 
 	}
 
+	
 	public Tab getFoodTab(Controller control) {
 		Tab foodTab = new Tab();
+		ImageView icon = new ImageView(new Image("fish-food.png"));
+	    icon.setFitWidth(16); 
+	    icon.setFitHeight(16); // your preference		
+		foodTab.setGraphic(icon);
 		foodTab.setClosable(false);
 		foodTab.setText("Food Log");
 		GridPane grid = new GridPane();
@@ -126,7 +146,7 @@ public class CatTrackerApp extends Application {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
-		Text scenetitle = new Text("Add food");
+		Text scenetitle = new Text("Food log");
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 0, 0, 2, 1);
 		ArrayList<CatFood> foods = control.getFoods();
@@ -137,35 +157,62 @@ public class CatTrackerApp extends Application {
 		}
 		grid.add(comboBox, 0, 1);
 
+		Label quantity = new Label("Quantity:");
+		grid.add(quantity, 0, 2);
+
+		TextField quantityTextField = new TextField();
+		quantityTextField.setMaxWidth(50);
+		grid.add(quantityTextField, 0, 3);
+
 		Button btn = new Button("Add food");
 		HBox hbBtn = new HBox(10);
 
 		Text caloriesToday = new Text("Todays calories: " + control.getTotalCalories());
 		grid.add(caloriesToday, 0, 7);
 
+		hbBtn.setAlignment(Pos.TOP_LEFT);
+		hbBtn.getChildren().add(btn);
+		grid.add(hbBtn, 0, 4);
+
+		TableView<FoodEntry> table = new TableView<FoodEntry>();
+		TableColumn foodName = new TableColumn("Food");
+		foodName.setMinWidth(300);
+		foodName.setCellValueFactory(new PropertyValueFactory<FoodEntry, CatFood>("food"));
+
+		TableColumn quantityCol = new TableColumn("Amount");
+		quantityCol.setMinWidth(100);
+		quantityCol.setCellValueFactory(new PropertyValueFactory<FoodEntry, String>("quantity"));
+
+		TableColumn timeCol = new TableColumn("Time");
+		timeCol.setMinWidth(200);
+		timeCol.setCellValueFactory(new PropertyValueFactory<FoodEntry, String>("foodTimeEntry"));
+		table.getColumns().addAll(foodName, quantityCol, timeCol);
+		table.prefHeightProperty().bind(primaryStage.heightProperty());
+		table.prefWidthProperty().bind(primaryStage.widthProperty());
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				control.addEntry(comboBox.getValue(), 1);
+				control.addEntry(comboBox.getValue(), Integer.parseInt(quantityTextField.getText()));
 				caloriesToday.setText("Todays calories: " + control.getTotalCalories());
+				// Todo The table display should update automatically if observable list is set
+				// up correctly,
+				// but setting it manually each time as a hack/shortcut
+				ObservableList<FoodEntry> data = FXCollections.observableArrayList(control.getTodaysEntries());
+				table.setItems(data);
 			}
 		});
-		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-		hbBtn.getChildren().add(btn);
-		grid.add(hbBtn, 1, 4);
-		
-		TableView<FoodEntry> table = new TableView<FoodEntry>();
-		 ObservableList<FoodEntry> entries = control.getTodaysEntries();
-		 table.setItems(entries);
-		
+		grid.add(table, 0, 5);
+
 		return foodTab;
 	}
 
 	@Override
 	public void start(Stage primaryStage) {
+		this.primaryStage = primaryStage;
+		this.primaryStage.getIcons().add(new Image("veterinary.png"));
 		Controller control = new Controller();
-		primaryStage.setTitle("Cat food Tracker");
+		primaryStage.setTitle("Pet Health Tracker");
 		showStartScreen(primaryStage, control);
 
 	}
