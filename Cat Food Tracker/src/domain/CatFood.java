@@ -1,3 +1,4 @@
+package domain;
 public class CatFood {
 	String catFoodID;
 	String brand;

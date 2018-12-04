@@ -1,3 +1,4 @@
+package domain;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -7,13 +8,17 @@ import java.util.List;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.Test;
 
+import domain.CatFood;
+import domain.FoodDiary;
+import domain.FoodEntry;
+
 class FoodDiaryTest {
 
 	@Test
 	void testInitialize() {
 		FoodDiary diary = new FoodDiary();
-		assertNotNull(diary.entries.get(DateUtils.truncate(new Date(), java.util.Calendar.DAY_OF_MONTH)));
-		assertEquals(diary.entries.get(DateUtils.truncate(new Date(), java.util.Calendar.DAY_OF_MONTH)).size(), 0);
+		assertNotNull(diary.getEntries().get(DateUtils.truncate(new Date(), java.util.Calendar.DAY_OF_MONTH)));
+		assertEquals(diary.getEntries().get(DateUtils.truncate(new Date(), java.util.Calendar.DAY_OF_MONTH)).size(), 0);
 	}
 	
 	@Test
@@ -58,14 +63,14 @@ class FoodDiaryTest {
 	@Test
 	void testGetTodaysEntriesNewDay(){
 		FoodDiary diary = new FoodDiary();
-		diary.entries.clear();
+		diary.getEntries().clear();
 		assertEquals(diary.getTodaysEntries(), null);		
 	}
 	
 	@Test
 	void testAddEntriesNewDay(){
 		FoodDiary diary = new FoodDiary();
-		diary.entries.clear();
+		diary.getEntries().clear();
 		CatFood food = new CatFood("a","b", "c", "d", 25);
 		FoodEntry entry = new FoodEntry(food, new Date(), 1);
 		diary.addEntry(entry);

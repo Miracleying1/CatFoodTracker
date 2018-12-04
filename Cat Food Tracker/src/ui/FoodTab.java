@@ -1,6 +1,10 @@
+package ui;
 
 import java.util.ArrayList;
 
+import common.Controller;
+import domain.CatFood;
+import domain.FoodEntry;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,7 +34,7 @@ import javafx.stage.Stage;
 
 public class FoodTab extends JavaFxTab {
 
-	FoodTab(Controller control, Stage primaryStage) {
+	public FoodTab(Controller control, Stage primaryStage) {
 		super(control, primaryStage);
 	}
 

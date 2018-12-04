@@ -1,3 +1,4 @@
+package domain;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.StringTokenizer;
  */
 public class CatFoodDatabase {
 	String filename;
-	ArrayList<CatFood> foodList;
+	private ArrayList<CatFood> foodList;
 
 	public CatFoodDatabase(String filename) {
 		this.filename = filename;
@@ -19,14 +20,14 @@ public class CatFoodDatabase {
 		try {
 			// TODO Currently this cannot handle names with spaces
 			Scanner inputStream = new Scanner(file);
-			foodList = new ArrayList<>();
+			setFoodList(new ArrayList<>());
 			while (inputStream.hasNext()) {
 				String data = inputStream.next();
 				StringTokenizer tokens = new StringTokenizer(data, ",");
 				if (tokens.countTokens() != 5) {
 					throw new RuntimeException("invalid cat food db file");
 				}
-				foodList.add(new CatFood(tokens.nextToken(), tokens.nextToken(), tokens.nextToken(), tokens.nextToken(),
+				getFoodList().add(new CatFood(tokens.nextToken(), tokens.nextToken(), tokens.nextToken(), tokens.nextToken(),
 						Double.parseDouble(tokens.nextToken())));
 			}
 			inputStream.close();
@@ -34,5 +35,13 @@ public class CatFoodDatabase {
 			e.printStackTrace();
 		}
 
+	}
+
+	public ArrayList<CatFood> getFoodList() {
+		return foodList;
+	}
+
+	public void setFoodList(ArrayList<CatFood> foodList) {
+		this.foodList = foodList;
 	}
 }

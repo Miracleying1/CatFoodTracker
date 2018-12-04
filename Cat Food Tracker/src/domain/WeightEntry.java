@@ -1,10 +1,11 @@
+package domain;
 import java.util.Date;
 
 public class WeightEntry {
 	double weight;
 	Date date;
 
-	WeightEntry(double weight, Date date) {
+	public WeightEntry(double weight, Date date) {
 		this.weight = weight;
 		this.date = date;
 	}

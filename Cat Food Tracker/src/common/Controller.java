@@ -1,7 +1,13 @@
+package common;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import domain.Cat;
+import domain.CatFood;
+import domain.CatFoodDatabase;
+import domain.FoodEntry;
+import domain.WeightEntry;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
@@ -64,7 +70,7 @@ public class Controller {
 
 	public ArrayList<CatFood> getFoods() {
 		CatFoodDatabase fromDb = new CatFoodDatabase(".\\CatFoodInfo.txt");
-		return fromDb.foodList;
+		return fromDb.getFoodList();
 	}
 
 	public ObservableList<WeightEntry> getWeightEntries() {

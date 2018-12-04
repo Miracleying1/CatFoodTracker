@@ -1,7 +1,10 @@
+package ui;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+import common.Controller;
+import domain.WeightEntry;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +28,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class WeightTab extends JavaFxTab {
-	WeightTab(Controller control, Stage primaryStage) {
+	public WeightTab(Controller control, Stage primaryStage) {
 		super(control, primaryStage);
 	}
 

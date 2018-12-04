@@ -1,4 +1,6 @@
+package ui;
 
+import common.Controller;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,7 +21,7 @@ import javafx.stage.Stage;
 
 public class InitCatTab extends JavaFxTab {
 
-	InitCatTab(Controller control, Stage primaryStage) {
+	public InitCatTab(Controller control, Stage primaryStage) {
 		super(control, primaryStage);
 	}
 

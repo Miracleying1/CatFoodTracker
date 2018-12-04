@@ -1,3 +1,4 @@
+package common;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -8,6 +9,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ui.FoodTab;
+import ui.InitCatTab;
+import ui.WeightTab;
 
 public class CatTrackerApp extends Application {
 

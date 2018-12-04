@@ -1,3 +1,5 @@
+package ui;
+import common.Controller;
 import javafx.scene.control.Tab;
 import javafx.stage.Stage;
 

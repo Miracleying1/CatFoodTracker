@@ -1,3 +1,4 @@
+package domain;
 import java.util.ArrayList;
 
 import javafx.beans.property.SimpleDoubleProperty;
@@ -30,7 +31,6 @@ public class Cat {
 	}
 
 	public void setFxCatName(String fxCatName) {
-		System.out.println("updaing fx cat name");
 		this.fxCatName.set(fxCatName);
 	}
 
