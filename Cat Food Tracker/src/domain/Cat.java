@@ -12,11 +12,13 @@ public class Cat {
 	StringProperty fxCatName = new SimpleStringProperty();
 	SimpleDoubleProperty fxCalorieGoal = new SimpleDoubleProperty(0);
 	SimpleDoubleProperty fxRemainingCals = new SimpleDoubleProperty(0);
+	SimpleDoubleProperty fxMaxWeight = new SimpleDoubleProperty(0);
+	SimpleDoubleProperty fxMinWeight = new SimpleDoubleProperty(0);
 
 	double startingWeight;
 
 	FoodDiary foodDiary = new FoodDiary();
-	ObservableList<WeightEntry> fxWeightDiaryList = FXCollections.observableArrayList();
+	WeightDiary weightDiary = new WeightDiary();	
 
 	public FoodDiary getFoodDiary() {
 		return foodDiary;
@@ -43,7 +45,7 @@ public class Cat {
 	}
 
 	public ObservableList<WeightEntry> getWeightDiaryList() {
-		return fxWeightDiaryList;
+		return weightDiary.getFxWeightDiaryList();
 	}
 
 	public String getCatName() {
@@ -86,6 +88,24 @@ public class Cat {
 	}
 
 	public void addWeightEntry(WeightEntry entry) {
-		fxWeightDiaryList.add(entry);
+		weightDiary.addEntry(entry);
+		setFxMaxWeight(weightDiary.getHighestWeight());
+		setFxMinWeight(weightDiary.getLowestWeight());
 	}
+
+	public SimpleDoubleProperty getFxMaxWeight() {
+		return fxMaxWeight;
+	}
+
+	public void setFxMaxWeight(double fxMaxWeight) {
+		this.fxMaxWeight.set(fxMaxWeight);
+	}
+
+	public SimpleDoubleProperty getFxMinWeight() {
+		return fxMinWeight;
+	}
+
+	public void setFxMinWeight(double fxMinWeight) {
+		this.fxMinWeight.set(fxMinWeight);
+	}	
 }

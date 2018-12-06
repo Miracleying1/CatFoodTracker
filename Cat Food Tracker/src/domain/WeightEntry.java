@@ -24,6 +24,6 @@ public class WeightEntry {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
+	}	
 
 }

@@ -45,7 +45,7 @@ public class Controller {
 	}
 
 	public void addWeightEntry(Date date, double weight) {
-		cat.addWeightEntry(new WeightEntry(weight, date));
+		cat.addWeightEntry(new WeightEntry(weight, date));		
 	}
 
 	public List<FoodEntry> getTodaysEntries() {

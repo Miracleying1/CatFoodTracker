@@ -50,8 +50,4 @@ public class CatFood {
 	public String toString() {
 		return brand + " " + foodName + " " + type + " (" + calories + " calories)";
 	}
-
-	public void PrintReports() {
-		System.out.println(toString());
-	}
 }

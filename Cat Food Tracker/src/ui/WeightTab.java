@@ -1,12 +1,11 @@
 package ui;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import common.Controller;
 import domain.WeightEntry;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -62,7 +61,6 @@ public class WeightTab extends JavaFxTab {
 		grid.add(textField, 0, 3);
 
 		TableView<WeightEntry> table = getWeightTable();
-		
 
 		Button btn = new Button("Add entry");
 		HBox hbBtn = new HBox(10);
@@ -70,18 +68,38 @@ public class WeightTab extends JavaFxTab {
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().add(btn);
 		grid.add(hbBtn, 0, 4);
-		
+
 		table.setItems(control.getWeightEntries());
-		
+
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent event) {				
-				control.addWeightEntry(new Date(), Double.parseDouble(textField.getText()));								//
+			public void handle(ActionEvent event) {
+				control.addWeightEntry(new Date(), Double.parseDouble(textField.getText())); //
 			}
 		});
 
 		grid.add(table, 0, 5);
+
+		Text maxWeight = new Text();
+		maxWeight.setText("Max weight: " + control.getCat().getFxMaxWeight());
+		control.getCat().getFxMaxWeight().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> o, Object oldVal, Object newVal) {
+				maxWeight.setText("Max weight: " + newVal);
+			}
+		});
+		grid.add(maxWeight, 0, 6);
+
+		Text minWeight = new Text();
+		maxWeight.setText("Min weight: " + control.getCat().getFxMinWeight());
+		control.getCat().getFxMinWeight().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue arg0, Object oldVal, Object newVal) {
+				minWeight.setText("Min weight: " + newVal);
+			}
+		});
+		grid.add(minWeight, 0, 7);
 
 		return tab;
 	}
