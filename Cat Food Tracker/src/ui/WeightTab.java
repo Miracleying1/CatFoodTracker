@@ -33,7 +33,7 @@ public class WeightTab extends JavaFxTab {
 
 	public Tab getTab() {
 		Tab tab = new Tab();
-		ImageView icon = new ImageView(new Image("fish-food.png"));
+		ImageView icon = new ImageView(new Image("balance.png"));
 		icon.setFitWidth(16);
 		icon.setFitHeight(16);
 		tab.setGraphic(icon);

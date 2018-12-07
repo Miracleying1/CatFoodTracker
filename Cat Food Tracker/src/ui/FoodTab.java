@@ -68,7 +68,7 @@ public class FoodTab extends JavaFxTab {
 		}
 		grid.add(comboBox, 0, 2);
 
-		Label quantity = new Label("Quantity:");
+		Label quantity = new Label("Quantity (oz):");
 		grid.add(quantity, 0, 3);
 
 		TextField quantityTextField = new TextField();
