@@ -8,7 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Cat {
-
+	
 	StringProperty fxCatName = new SimpleStringProperty();
 	SimpleDoubleProperty fxCalorieGoal = new SimpleDoubleProperty(0);
 	SimpleDoubleProperty fxRemainingCals = new SimpleDoubleProperty(0);
@@ -16,6 +16,7 @@ public class Cat {
 	SimpleDoubleProperty fxMinWeight = new SimpleDoubleProperty(0);
 
 	double startingWeight;
+	final int caloriePerPound=30;
 
 	FoodDiary foodDiary = new FoodDiary();
 	WeightDiary weightDiary = new WeightDiary();	
@@ -62,7 +63,7 @@ public class Cat {
 
 	public void setStartingWeight(double weight) {
 		this.startingWeight = weight;
-		this.setCalorieGoal(weight * 30);
+		this.setCalorieGoal(weight * caloriePerPound);
 		fxRemainingCals.setValue(getCalorieGoal() - foodDiary.getTotalCaloriesToday());
 	}
 

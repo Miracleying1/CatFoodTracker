@@ -46,8 +46,9 @@ public class CatFood {
 	public void setCalories(double calories) {
 		this.calories = calories;
 	}
-
+	
 	public String toString() {
 		return brand + " " + foodName + " " + type + " (" + calories + " calories)";
 	}
+	
 }
