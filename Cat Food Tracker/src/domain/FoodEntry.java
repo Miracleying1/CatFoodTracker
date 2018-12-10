@@ -37,6 +37,6 @@ public class FoodEntry {
 	}
 
 	public double getCalories() {
-		return food.getCalories() * quantity;
+		return Math.round(food.getCalories() * quantity);
 	}
 }
