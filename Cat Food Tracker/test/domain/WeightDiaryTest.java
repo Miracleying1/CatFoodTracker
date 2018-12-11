@@ -34,7 +34,7 @@ class WeightDiaryTest {
 		diary.addEntry(entry1);
 		WeightEntry entry2=new WeightEntry(12, new Date());
 		diary.addEntry(entry2);
-		assertEquals(diary.getLowestWeight(),12);
+		assertEquals(diary.getHighestWeight(),12);
 	}
 
 
