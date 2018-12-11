@@ -33,14 +33,14 @@ class FoodEntryTest {
 	}
 	
 	@Test
-	void testSetFoodTimeEntry() {
+	void testGetFoodTimeEntry() {
 		CatFood food=new CatFood("a","b","c","d",25);
 		FoodEntry entry=new FoodEntry(food, new Date(), 2);
 		assertEquals(entry.getFoodTimeEntry(), new Date());
 	}
 
 	@Test
-	void testGetFoodTimeEntry() {
+	void testSetFoodTimeEntry() {
 		CatFood food=new CatFood("a","b","c","d",25);
 		FoodEntry entry=new FoodEntry(food, null, 0);
 		entry.setFoodTimeEntry(new Date());
