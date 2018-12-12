@@ -60,13 +60,8 @@ public class FoodTab extends JavaFxTab {
 		subtitle.textProperty().bind(control.getCat().getFxCatName());
 		grid.add(subtitle, 0, 1, 2, 1);
 
-		ArrayList<CatFood> foods = control.getFoods();
-		ObservableList<CatFood> options = FXCollections.observableArrayList();
-		final ComboBox<CatFood> comboBox = new ComboBox<CatFood>(options);
-		for (int i = 0; i < foods.size(); i++) {
-			options.add(foods.get(i));
-		}
-		grid.add(comboBox, 0, 2);
+		CatFoodDropdown dropdown = new CatFoodDropdown(control);
+		grid.add(dropdown.getComboBox(), 0, 2);
 
 		Label quantity = new Label("Quantity (oz):");
 		grid.add(quantity, 0, 3);
@@ -99,12 +94,12 @@ public class FoodTab extends JavaFxTab {
 
 		BooleanBinding bb = new BooleanBinding() {
 			{
-				super.bind(quantityTextField.textProperty(), comboBox.valueProperty());
+				super.bind(quantityTextField.textProperty(), dropdown.getProperty());
 			}
 
 			@Override
 			protected boolean computeValue() {
-				return (quantityTextField.getText().isEmpty() || comboBox.getValue() == null);
+				return (quantityTextField.getText().isEmpty() || !dropdown.comboBoxHasSelection());
 			}
 		};
 
@@ -128,7 +123,7 @@ public class FoodTab extends JavaFxTab {
 
 			@Override
 			public void handle(ActionEvent event) {
-				control.addEntry(comboBox.getValue(), Integer.parseInt(quantityTextField.getText()));
+				control.addEntry(dropdown.getSelection(), Integer.parseInt(quantityTextField.getText()));
 
 				// Todo The table display should update automatically if observable list is set
 				// up correctly,
