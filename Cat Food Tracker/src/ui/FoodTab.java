@@ -123,7 +123,7 @@ public class FoodTab extends JavaFxTab {
 
 			@Override
 			public void handle(ActionEvent event) {
-				control.addEntry(dropdown.getSelection(), Integer.parseInt(quantityTextField.getText()));
+				control.addEntry(dropdown.getSelection(), Double.parseDouble(quantityTextField.getText()));
 
 				// Todo The table display should update automatically if observable list is set
 				// up correctly,

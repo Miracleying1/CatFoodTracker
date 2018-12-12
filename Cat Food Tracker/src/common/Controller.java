@@ -40,7 +40,7 @@ public class Controller {
 		return unInitialized;
 	}
 
-	public void addEntry(CatFood food, int quantity) {
+	public void addEntry(CatFood food, double quantity) {
 		cat.addFoodEntry(new FoodEntry(food, new Date(), quantity));
 	}
 

@@ -4,9 +4,9 @@ import java.util.Date;
 public class FoodEntry {
 	CatFood food;
 	Date foodTimeEntry;
-	int quantity;
+	double quantity;
 
-	public FoodEntry(CatFood food, Date time, int quantity) {
+	public FoodEntry(CatFood food, Date time, double quantity) {
 		this.food = food;
 		this.foodTimeEntry = time;
 		this.quantity = quantity;
@@ -28,11 +28,11 @@ public class FoodEntry {
 		this.foodTimeEntry = foodTimeEntry;
 	}
 
-	public int getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 
