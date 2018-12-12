@@ -19,7 +19,7 @@ class CatTest {
 	@Test
 	void testGetRemainingCals() {
 		Cat cat = new Cat();
-		CatFood food = new CatFood("a","b", "c", "d", 25);
+		CatFood food = new CatFood("b","c", "d", 25);
 		cat.addFoodEntry(new FoodEntry(food, new Date(), 1));
 		
 		cat.setStartingWeight(10);

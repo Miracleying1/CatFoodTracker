@@ -24,11 +24,10 @@ public class CatFoodDatabase {
 			while (inputStream.hasNext()) {
 				String data = inputStream.next();
 				StringTokenizer tokens = new StringTokenizer(data, ",");
-				if (tokens.countTokens() != 5) {
+				if (tokens.countTokens() != 4) {
 					throw new RuntimeException("invalid cat food db file");
 				}
-				getFoodList().add(new CatFood(tokens.nextToken(), tokens.nextToken(), tokens.nextToken(), tokens.nextToken(),
-						Double.parseDouble(tokens.nextToken())));
+				getFoodList().add(new CatFood(tokens.nextToken(), tokens.nextToken(), tokens.nextToken(), Double.parseDouble(tokens.nextToken())));
 			}
 			inputStream.close();
 		} catch (FileNotFoundException e) {

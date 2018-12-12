@@ -24,7 +24,7 @@ class FoodDiaryTest {
 	@Test
 	void testAddEntry(){
 		FoodDiary diary = new FoodDiary();
-		CatFood food = new CatFood("a","b", "c", "d", 25);
+		CatFood food = new CatFood("b","c", "d", 25);
 		FoodEntry entry = new FoodEntry(food, new Date(), 1);
 		diary.addEntry(entry);
 		assertEquals(diary.getTotalCaloriesToday(), 25);
@@ -33,7 +33,7 @@ class FoodDiaryTest {
 	@Test
 	void testAddTwoEntries(){
 		FoodDiary diary = new FoodDiary();
-		CatFood food = new CatFood("a","b", "c", "d", 25);
+		CatFood food = new CatFood("b","c", "d", 25);
 		FoodEntry entry1 = new FoodEntry(food, new Date(), 1);
 		FoodEntry entry2 = new FoodEntry(food, new Date(), 1);
 		diary.addEntry(entry1);
@@ -44,7 +44,7 @@ class FoodDiaryTest {
 	@Test
 	void testAddEntryWithQuantity(){
 		FoodDiary diary = new FoodDiary();
-		CatFood food = new CatFood("a","b", "c", "d", 25);
+		CatFood food = new CatFood("b","c", "d", 25);
 		FoodEntry entry = new FoodEntry(food, new Date(), 3);
 		diary.addEntry(entry);
 		assertEquals(diary.getTotalCaloriesToday(), 75);
@@ -53,7 +53,7 @@ class FoodDiaryTest {
 	@Test
 	void testGetTodaysEntries(){
 		FoodDiary diary = new FoodDiary();
-		CatFood food = new CatFood("a","b", "c", "d", 25);
+		CatFood food = new CatFood("b","c", "d", 25);
 		FoodEntry entry = new FoodEntry(food, new Date(), 1);
 		diary.addEntry(entry);
 		assertEquals(diary.getTodaysEntries().size(), 1);
@@ -71,7 +71,7 @@ class FoodDiaryTest {
 	void testAddEntriesNewDay(){
 		FoodDiary diary = new FoodDiary();
 		diary.getEntries().clear();
-		CatFood food = new CatFood("a","b", "c", "d", 25);
+		CatFood food = new CatFood("b","c", "d", 25);
 		FoodEntry entry = new FoodEntry(food, new Date(), 1);
 		diary.addEntry(entry);
 		assertEquals(diary.getTotalCaloriesToday(), 25);		
