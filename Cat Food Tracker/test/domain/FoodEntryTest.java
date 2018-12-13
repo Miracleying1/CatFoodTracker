@@ -22,12 +22,10 @@ class FoodEntryTest {
 	@Test
 	void testSetFood() {
 		CatFood food=new CatFood("b","c","d",25);
-		food.setCatFoodID("D001");
 		food.setBrand("Merrick");
 		food.setType("Dry");
 		food.setCalories(26.56);
 		assertEquals(food.getBrand(),"Merrick");
-		assertEquals(food.getCatFoodID(), "D001");
 		assertEquals(food.getType(),"Dry");
 		assertEquals(food.getCalories(), 26.56);
 	}
