@@ -45,6 +45,12 @@ class CatFoodTest {
 		assertEquals(food.getCalories(),5.6);
 	}
 	
+	@Test
+	void testToString() {
+		CatFood food=new CatFood("a","b","c", 3.2);		
+		assertEquals(food.toString(),"a b c (3.2 calories)");
+	}
+	
 	
 
 }

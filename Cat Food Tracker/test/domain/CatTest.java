@@ -22,6 +22,7 @@ class CatTest {
 		assertEquals(cat.getStartingWeight(), 10);
 		assertEquals(cat.getCalorieGoal(), 300);
 		assertEquals(cat.getRemainingCaloriesToday(), 300);
+		assertEquals(cat.getFxRemainingCals().get(), 300);
 	}
 
 	@Test
@@ -70,6 +71,26 @@ class CatTest {
 		Cat cat=new Cat();
 		cat.setCalorieGoal(300);
 		assertEquals(cat.getCalorieGoal(),300);
+	}
+	
+	@Test
+	void testAddWeightEntry() {
+		Cat cat=new Cat();
+		cat.addWeightEntry(new WeightEntry(12, new Date()));
+		assertEquals(cat.getWeightDiaryList().size(),1);
+		assertEquals(12.0, cat.getFxMaxWeight().get());
+		assertEquals(12.0, cat.getFxMinWeight().get());
+	}
+	
+	@Test
+	void testAddMultipleWeightEntries() {
+		Cat cat=new Cat();
+		cat.addWeightEntry(new WeightEntry(12.0, new Date()));
+		cat.addWeightEntry(new WeightEntry(10.0, new Date()));
+		cat.addWeightEntry(new WeightEntry(8.0, new Date()));
+		assertEquals(cat.getWeightDiaryList().size(),3);
+		assertEquals(12.0, cat.getFxMaxWeight().get());
+		assertEquals(8.0, cat.getFxMinWeight().get());
 	}
 
 }
