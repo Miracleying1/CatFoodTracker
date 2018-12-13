@@ -10,6 +10,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ui.FoodTab;
+import ui.HelpTab;
 import ui.InitCatTab;
 import ui.WeightTab;
 
@@ -30,6 +31,7 @@ public class CatTrackerApp extends Application {
 		Tab initTab = new InitCatTab(control, primaryStage).getTab();
 		Tab foodTab = new FoodTab(control, primaryStage).getTab();
 		Tab weightTab = new WeightTab(control, primaryStage).getTab();
+		Tab helpTab = new HelpTab(control, primaryStage).getTab();
 
 		foodTab.disableProperty().bind(control.getUnInitialized());
 		weightTab.disableProperty().bind(control.getUnInitialized());
@@ -37,6 +39,7 @@ public class CatTrackerApp extends Application {
 		tabPane.getTabs().add(initTab);
 		tabPane.getTabs().add(foodTab);
 		tabPane.getTabs().add(weightTab);
+		tabPane.getTabs().add(helpTab);
 
 		primaryStage.setScene(scene);
 		primaryStage.setHeight(600);
