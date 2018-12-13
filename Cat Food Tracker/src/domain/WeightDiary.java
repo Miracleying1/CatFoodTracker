@@ -12,10 +12,6 @@ public class WeightDiary {
 		return fxWeightDiaryList;
 	}
 
-	public void setFxWeightDiaryList(ObservableList<WeightEntry> fxWeightDiaryList) {
-		this.fxWeightDiaryList = fxWeightDiaryList;
-	}
-	
 	public void addEntry(WeightEntry entry) {
 		this.fxWeightDiaryList.add(entry);
 	}

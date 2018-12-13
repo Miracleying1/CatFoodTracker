@@ -16,10 +16,6 @@ public class FoodEntry {
 		return food;
 	}
 
-	public void setFood(CatFood food) {
-		this.food = food;
-	}
-
 	public Date getFoodTimeEntry() {
 		return foodTimeEntry;
 	}

@@ -29,10 +29,6 @@ public class Cat {
 		return fxCatName;
 	}
 
-	public void setFoodDiary(FoodDiary foodDiary) {
-		this.foodDiary = foodDiary;
-	}
-
 	public void setFxCatName(String fxCatName) {
 		this.fxCatName.set(fxCatName);
 	}
@@ -76,7 +72,8 @@ public class Cat {
 	}
 
 	public double getRemainingCaloriesToday() {
-		return getCalorieGoal() - foodDiary.getTotalCaloriesToday();
+		this.fxRemainingCals.setValue(getCalorieGoal() - foodDiary.getTotalCaloriesToday()); 
+		return this.fxRemainingCals.get();
 	}
 
 	public double getTotalCaloriesToday() {
