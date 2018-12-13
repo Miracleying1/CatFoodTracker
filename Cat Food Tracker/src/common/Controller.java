@@ -1,4 +1,5 @@
 package common;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -69,7 +70,14 @@ public class Controller {
 	}
 
 	public ArrayList<CatFood> getFoods() {
-		CatFoodDatabase fromDb = new CatFoodDatabase(".\\CatFoodInfo.txt");
+		CatFoodDatabase fromDb = null;
+		try {
+			fromDb = new CatFoodDatabase(".\\CatFoodInfo.txt");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
 		return fromDb.getFoodList();
 	}
 

@@ -43,5 +43,15 @@ public class CatFood {
 	public String toString() {
 		return brand + " " + foodName + " " + type + " (" + calories + " calories)";
 	}
+
+
+	public String getFoodName() {
+		return foodName;
+	}
+
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
 	
 }

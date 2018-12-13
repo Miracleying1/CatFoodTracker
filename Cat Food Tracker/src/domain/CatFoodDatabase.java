@@ -14,13 +14,12 @@ public class CatFoodDatabase {
 	String filename;
 	private ArrayList<CatFood> foodList;
 
-	public CatFoodDatabase(String filename) {
+	public CatFoodDatabase(String filename) throws FileNotFoundException, RuntimeException {
 		this.filename = filename;
-		File file = new File(filename);
-		try {
+		File file = new File(filename);		
 			// TODO Currently this cannot handle names with spaces
 			Scanner inputStream = new Scanner(file);
-			setFoodList(new ArrayList<>());
+			this.foodList = new ArrayList<>();
 			while (inputStream.hasNext()) {
 				String data = inputStream.next();
 				StringTokenizer tokens = new StringTokenizer(data, ",");
@@ -29,18 +28,10 @@ public class CatFoodDatabase {
 				}
 				getFoodList().add(new CatFood(tokens.nextToken(), tokens.nextToken(), tokens.nextToken(), Double.parseDouble(tokens.nextToken())));
 			}
-			inputStream.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
+			inputStream.close();	
 	}
 
 	public ArrayList<CatFood> getFoodList() {
 		return foodList;
-	}
-
-	public void setFoodList(ArrayList<CatFood> foodList) {
-		this.foodList = foodList;
 	}
 }
