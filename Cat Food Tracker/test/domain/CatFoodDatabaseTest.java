@@ -1,14 +1,13 @@
 package domain;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 public class CatFoodDatabaseTest {
 
 	@Test
@@ -21,7 +20,7 @@ public class CatFoodDatabaseTest {
 		}
 		assertEquals(testDb.getFoodList().size(), 1);
 		assertEquals(testDb.getFoodList().get(0).getBrand(), "Merrick");
-		assertEquals(testDb.getFoodList().get(0).getFoodName(), "Turkey");
+		assertEquals(testDb.getFoodList().get(0).getFoodName(), "Turkey Yum");
 		assertEquals(testDb.getFoodList().get(0).getType(), "Dry");
 		assertEquals(testDb.getFoodList().get(0).getCalories(), 26.56);
 	}

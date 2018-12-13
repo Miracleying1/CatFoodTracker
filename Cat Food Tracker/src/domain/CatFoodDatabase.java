@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 /**
  * This class simulates a database containing pet food data by reading from a
@@ -17,16 +16,16 @@ public class CatFoodDatabase {
 	public CatFoodDatabase(String filename) throws FileNotFoundException, RuntimeException {
 		this.filename = filename;
 		File file = new File(filename);		
-			// TODO Currently this cannot handle names with spaces
 			Scanner inputStream = new Scanner(file);
+			inputStream.useDelimiter("\\n");
 			this.foodList = new ArrayList<>();
-			while (inputStream.hasNext()) {
-				String data = inputStream.next();
-				StringTokenizer tokens = new StringTokenizer(data, ",");
-				if (tokens.countTokens() != 4) {
-					throw new RuntimeException("invalid cat food db file");
+			while (inputStream.hasNextLine()) {
+				String data = inputStream.nextLine();			
+				String[] tokens = data.split(",");			
+				if (tokens.length != 4) {
+					throw new RuntimeException("invalid cat food db file, found invalid number of tokens:" + tokens.length);
 				}
-				getFoodList().add(new CatFood(tokens.nextToken(), tokens.nextToken(), tokens.nextToken(), Double.parseDouble(tokens.nextToken())));
+				getFoodList().add(new CatFood(tokens[0], tokens[1], tokens[2], Double.parseDouble(tokens[3])));
 			}
 			inputStream.close();	
 	}

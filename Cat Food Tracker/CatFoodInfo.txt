@@ -1,7 +1,6 @@
 Merrick,Turkey,Dry,26.56
-Wellness,Turkey&Duck,Dry,34.18
+Wellness,Turkey & Duck,Dry,34.18
 Authority,Beef,Dry,36.55
-BlueBuffalo,TemptingTunaGrill,Wet,26.5
-Friskies,ClassicSeafood,Wet,31.27
-FancyFeast,WildSalmon,Wet,24.67
-
+BlueBuffalo,Tempting Tuna Grill,Wet,26.5
+Friskies,Classic Seafood,Wet,31.27
+Fancy Feast,Wild Salmon,Wet,24.67
