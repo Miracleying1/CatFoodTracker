@@ -133,6 +133,9 @@ public class FoodTab extends JavaFxTab {
 				if (control.getRemainingCalories() <= 0) {
 					calorieMessage.setText("Cat is over the calorie limit!");
 					calorieMessage.setFill(Color.RED);
+				} else {
+					calorieMessage.setText("Cat can keep eating!");
+					calorieMessage.setFill(Color.BLACK);
 				}
 				ObservableList<FoodEntry> data = FXCollections.observableArrayList(control.getTodaysEntries());
 				table.setItems(data);
